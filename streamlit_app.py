@@ -1,57 +1,155 @@
-import streamlit as st
+import React, { useState } from "react";
 
-# data larutan
-data = {
-    "HCl": {
-        "pH": 1,
-        "sifat": "Asam",
-        "warna": "Tidak berwarna"
+export default function TheoryHub() {
+
+  const [menu, setMenu] = useState("teori");
+
+  // data indikator
+  const indikator = [
+    {
+      nama: "Fenolftalein",
+      ph: "8.3 - 10",
+      asam: "Tidak berwarna",
+      basa: "Pink"
     },
 
-    "NaOH": {
-        "pH": 13,
-        "sifat": "Basa",
-        "warna": "Pink"
+    {
+      nama: "Metil Jingga",
+      ph: "3.1 - 4.4",
+      asam: "Merah",
+      basa: "Kuning"
     },
 
-    "CH3COOH": {
-        "pH": 3,
-        "sifat": "Asam",
-        "warna": "Tidak berwarna"
-    },
-
-    "NH4OH": {
-        "pH": 11,
-        "sifat": "Basa",
-        "warna": "Pink"
+    {
+      nama: "Bromtimol Biru",
+      ph: "6.0 - 7.6",
+      asam: "Kuning",
+      basa: "Biru"
     }
-}
+  ];
 
-# title
-st.title("🧪 ChemIndicator")
-st.write("Simulasi indikator asam basa")
+  return (
 
-# pilih larutan
-larutan = st.selectbox(
-    "Pilih Larutan",
-    list(data.keys())
-)
+    <div
+      style={{
+        background: "#0f172a",
+        color: "white",
+        padding: "20px",
+        borderRadius: "10px"
+      }}
+    >
 
-# tombol cek
-if st.button("Cek Hasil"):
+      {/* JUDUL */}
+      <h1>ChemIndicator Learning Hub</h1>
 
-    hasil = data[larutan]
+      <p>
+        Website pembelajaran indikator asam basa
+      </p>
 
-    st.subheader("Hasil Simulasi")
+      {/* MENU */}
+      <div style={{ marginBottom: "20px" }}>
 
-    st.write(f"**Larutan :** {larutan}")
-    st.write(f"**Sifat :** {hasil['sifat']}")
-    st.write(f"**pH :** {hasil['pH']}")
-    st.write(f"**Warna indikator :** {hasil['warna']}")
+        <button onClick={() => setMenu("teori")}>
+          Teori
+        </button>
 
-    # warna visual
-    if hasil["sifat"] == "Asam":
-        st.error("🔴 Larutan Bersifat Asam")
+        <button onClick={() => setMenu("indikator")}>
+          Indikator
+        </button>
 
-    else:
-        st.success("🔵 Larutan Bersifat Basa")
+        <button onClick={() => setMenu("faq")}>
+          FAQ
+        </button>
+
+      </div>
+
+      {/* TEORI */}
+      {menu === "teori" && (
+
+        <div>
+
+          <h2>Teori Asam Basa</h2>
+
+          <h3>1. Arrhenius</h3>
+          <p>
+            Asam menghasilkan ion H+ dan basa menghasilkan ion OH- di air.
+          </p>
+
+          <h3>2. Bronsted Lowry</h3>
+          <p>
+            Asam memberi proton dan basa menerima proton.
+          </p>
+
+          <h3>3. Lewis</h3>
+          <p>
+            Asam menerima pasangan elektron dan basa memberi pasangan elektron.
+          </p>
+
+        </div>
+      )}
+
+      {/* INDIKATOR */}
+      {menu === "indikator" && (
+
+        <div>
+
+          <h2>Tabel Indikator</h2>
+
+          <table border="1" cellPadding="10">
+
+            <thead>
+              <tr>
+                <th>Indikator</th>
+                <th>Trayek pH</th>
+                <th>Warna Asam</th>
+                <th>Warna Basa</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              {indikator.map((item, index) => (
+
+                <tr key={index}>
+
+                  <td>{item.nama}</td>
+                  <td>{item.ph}</td>
+                  <td>{item.asam}</td>
+                  <td>{item.basa}</td>
+
+                </tr>
+
+              ))}
+
+            </tbody>
+
+          </table>
+
+        </div>
+      )}
+
+      {/* FAQ */}
+      {menu === "faq" && (
+
+        <div>
+
+          <h2>FAQ</h2>
+
+          <h3>Apa itu indikator?</h3>
+
+          <p>
+            Indikator adalah zat yang berubah warna sesuai pH larutan.
+          </p>
+
+          <h3>Kenapa indikator penting?</h3>
+
+          <p>
+            Karena membantu menentukan sifat asam atau basa suatu larutan.
+          </p>
+
+        </div>
+      )}
+
+    </div>
+  );
+}asa")
