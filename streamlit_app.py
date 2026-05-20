@@ -8,6 +8,15 @@ st.set_page_config(
     page_title="ChemClass Lab - Streamlit Edition",
     page_icon="🧪",
     layout="wide"
+    st.markdown("""
+<style>
+
+.stApp {
+    background-color: #4c1d95;
+}
+
+</style>
+""", unsafe_allow_html=True)
 )
 
 # Kustomisasi CSS untuk ambient gelap modern dan sentuhan UI yang halus
@@ -101,7 +110,7 @@ INDICATORS = {
 st.title("🧪 ChemClass Lab - Python Edition")
 st.write("Belajar sains asam-basa dan koding Python pemula sekaligus dalam satu platform terpadu.")
 
-menu = st.tabs(["📊 LAB SIMULATOR", "🐍 KODING PYTHON", "📝 KUIS INTERAKTIF", "📚 RINGKASAN TEORI"])
+menu = st.tabs(["📊 LAB SIMULATOR"])
 
 # ==========================================
 # HELPER: FUNGSI PENENTU WARNA CAIRAN
