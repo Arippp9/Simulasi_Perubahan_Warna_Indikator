@@ -10,68 +10,6 @@ st.set_page_config(
     layout="wide",
 )
 
-# Kustomisasi CSS untuk ambient ungu neon modern yang futuristik dan konsisten
-st.markdown("""
-<style>
-    /* Mengubah latar belakang utama aplikasi Streamlit */
-    .stApp {
-        background: radial-gradient(circle at 50% 50%, #16072b 0%, #070112 100%) !important;
-        background-attachment: fixed;
-    }
-    
-    /* Gelas Beaker area dengan bingkai ungu neon bersinar */
-    .beaker-container {
-        border: 2px solid rgba(168, 85, 247, 0.5);
-        border-radius: 16px;
-        padding: 30px;
-        background: rgba(14, 2, 28, 0.85);
-        text-align: center;
-        margin: 10px 0;
-        box-shadow: 0 0 25px rgba(168, 85, 247, 0.25), inset 0 0 15px rgba(168, 85, 247, 0.1);
-        backdrop-filter: blur(8px);
-    }
-    
-    /* HUD Panel info zat dengan border kiri neon ungu menyala */
-    .chemical-hud {
-        background-color: rgba(22, 10, 40, 0.9);
-        border-left: 5px solid #a855f7;
-        box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
-        padding: 18px;
-        border-radius: 10px;
-        margin: 12px 0;
-        border-top: 1px solid rgba(168, 85, 247, 0.15);
-        border-right: 1px solid rgba(168, 85, 247, 0.15);
-        border-bottom: 1px solid rgba(168, 85, 247, 0.15);
-    }
-    
-    /* Penyelarasan warna teks agar ramah estetika gelap */
-    h1, h2, h3, h4, h5, p, span, li, b {
-        color: #f3e8ff !important;
-    }
-
-    code {
-        background-color: #0b0214 !important;
-        color: #d8b4fe !important;
-        border: 1px solid rgba(168, 85, 247, 0.3) !important;
-    }
-    
-    /* Label teks komponen input */
-    .stSelectbox label, .stSlider label {
-        font-family: monospace;
-        font-weight: bold;
-        color: #d8b4fe !important;
-        letter-spacing: 0.05em;
-    }
-    
-    /* Kustomisasi Box Input dropdown agar menyatu dengan tema */
-    div[data-baseweb="select"] {
-        background-color: #0a0314 !important;
-        border: 1px solid rgba(168, 85, 247, 0.4) !important;
-        border-radius: 8px !important;
-    }
-</style>
-""", unsafe_allow_html=True)
-
 # ==========================================
 # 2. DATASET KIMIA (PRESETS ZAT & INDIKATOR)
 # ==========================================
@@ -236,3 +174,9 @@ with menu[0]:
             <b>Kategori Kelas:</b> {selected_chem['category']}
         </div>
         """, unsafe_allow_html=True)
+
+menu = st.tabs(["Music 🎶🎶🎧"])
+
+spotify_link = "<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/album/5pGHtIQt7DH1e4FXywAvgt?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"
+
+st.markdown(spotify_link, unsafe_allow_html=True)
