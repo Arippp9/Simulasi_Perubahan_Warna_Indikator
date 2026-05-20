@@ -2,48 +2,72 @@ import streamlit as st
 import math
 
 # ==========================================
-# 1. KONFIGURASI HALAMAN & ENERGI ESTETIKA
+# 1. KONFIGURASI HALAMAN & ENERGI ESTETIKA (NEON PURPLE)
 # ==========================================
 st.set_page_config(
     page_title="ChemClass Lab - Streamlit Edition",
     page_icon="🧪",
     layout="wide",
-    [theme]
-base="dark"
-primaryColor="forestGreen"
-
-   
 )
 
-# Kustomisasi CSS untuk ambient gelap modern dan sentuhan UI yang halus
+# Kustomisasi CSS untuk ambient ungu neon modern yang futuristik dan konsisten
 st.markdown("""
 <style>
-    .reportview-container {
-        background: #0e1117;
+    /* Mengubah latar belakang utama aplikasi Streamlit */
+    .stApp {
+        background: radial-gradient(circle at 50% 50%, #16072b 0%, #070112 100%) !important;
+        background-attachment: fixed;
     }
+    
+    /* Gelas Beaker area dengan bingkai ungu neon bersinar */
     .beaker-container {
-        border: 2px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
+        border: 2px solid rgba(168, 85, 247, 0.5);
+        border-radius: 16px;
         padding: 30px;
-        background-color: #08080a;
+        background: rgba(14, 2, 28, 0.85);
         text-align: center;
         margin: 10px 0;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        box-shadow: 0 0 25px rgba(168, 85, 247, 0.25), inset 0 0 15px rgba(168, 85, 247, 0.1);
+        backdrop-filter: blur(8px);
     }
+    
+    /* HUD Panel info zat dengan border kiri neon ungu menyala */
     .chemical-hud {
-        background-color: #111217;
-        border-left: 4px solid #4f46e5;
-        padding: 15px;
-        border-radius: 8px;
-        margin: 10px 0;
+        background-color: rgba(22, 10, 40, 0.9);
+        border-left: 5px solid #a855f7;
+        box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
+        padding: 18px;
+        border-radius: 10px;
+        margin: 12px 0;
+        border-top: 1px solid rgba(168, 85, 247, 0.15);
+        border-right: 1px solid rgba(168, 85, 247, 0.15);
+        border-bottom: 1px solid rgba(168, 85, 247, 0.15);
     }
-    .terminal-box {
-        font-family: 'Courier New', Courier, monospace;
-        background-color: #000000;
-        color: #10b981;
-        padding: 15px;
-        border-radius: 6px;
-        border: 1px solid #1e293b;
+    
+    /* Penyelarasan warna teks agar ramah estetika gelap */
+    h1, h2, h3, h4, h5, p, span, li, b {
+        color: #f3e8ff !important;
+    }
+
+    code {
+        background-color: #0b0214 !important;
+        color: #d8b4fe !important;
+        border: 1px solid rgba(168, 85, 247, 0.3) !important;
+    }
+    
+    /* Label teks komponen input */
+    .stSelectbox label, .stSlider label {
+        font-family: monospace;
+        font-weight: bold;
+        color: #d8b4fe !important;
+        letter-spacing: 0.05em;
+    }
+    
+    /* Kustomisasi Box Input dropdown agar menyatu dengan tema */
+    div[data-baseweb="select"] {
+        background-color: #0a0314 !important;
+        border: 1px solid rgba(168, 85, 247, 0.4) !important;
+        border-radius: 8px !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -101,7 +125,7 @@ INDICATORS = {
 }
 
 # ==========================================
-# 3. HEADER & MENU NAVIGASI UTAMA
+# 3. HEADER UTAMA
 # ==========================================
 st.title("🧪 ChemClass Lab - Python Edition")
 st.write("Belajar sains asam-basa dan koding Python pemula sekaligus dalam satu platform terpadu.")
@@ -114,14 +138,13 @@ menu = st.tabs(["📊 LAB SIMULATOR"])
 def hitung_warna_indikator(ph, ind_data):
     low, high = ind_data["range"]
     if ind_data["name"] == "Indikator Universal":
-        # Spectrum interpolasi manual sederhana untuk kelas universal
-        if ph < 3: return "#dc2626"  # Red
-        elif ph < 5: return "#f97316"  # Orange
-        elif ph < 6.5: return "#eab308"  # Yellow
-        elif ph < 7.5: return "#16a34a"  # Green
-        elif ph < 9: return "#0284c7"  # Light blue
-        elif ph < 11: return "#1d4ed8"  # Dark blue
-        else: return "#581c87"  # Purple
+        if ph < 3: return "#dc2626"  # Merah asam kuat
+        elif ph < 5: return "#f97316"  # Oranye
+        elif ph < 6.5: return "#eab308"  # Kuning
+        elif ph < 7.5: return "#16a34a"  # Hijau netral
+        elif ph < 9: return "#0284c7"  # Biru muda
+        elif ph < 11: return "#1d4ed8"  # Biru tua
+        else: return "#581c87"  # Ungu basa kuat
     
     if ph < low:
         return ind_data["low_color"]
@@ -141,7 +164,7 @@ with menu[0]:
         
         # Pilihan Preset Senyawa
         preset_names = [chem["name"] for chem in CHEMICALS]
-        pilihan_preset = st.selectbox("Pilih Preset Zat Kimia:", preset_names, index=2) # default cuka
+        pilihan_preset = st.selectbox("Pilih Preset Zat Kimia:", preset_names, index=2) # Default cuka
         selected_chem = next(chem for chem in CHEMICALS if chem["name"] == pilihan_preset)
         
         # Pilihan Indikator
@@ -163,19 +186,19 @@ with menu[0]:
         # Ambil warna secara dinamis berdasarkan pH slider
         liquid_color = hitung_warna_indikator(simulated_ph, selected_ind_data)
         
-        # Visualisasi Gelas Beaker menggunakan Formatted HTML
+        # Visualisasi Gelas Beaker khas dengan border bersinar ungu neon
         container_html = f"""
         <div class="beaker-container">
-            <span style="font-size: 11px; font-weight: bold; color: #94a3b8; display: block; margin-bottom: 15px;">BEAKER LAB METRIK</span>
+            <span style="font-size: 11px; font-weight: bold; color: #d8b4fe; display: block; margin-bottom: 15px; letter-spacing: 0.1em; font-family: monospace;">LABORATORIUM METRIK UNGU</span>
             <div style="
                 width: 140px; 
                 height: 160px; 
-                border: 4px solid rgba(255, 255, 255, 0.4); 
+                border: 4px solid rgba(168, 85, 247, 0.4); 
                 border-top: none;
                 border-radius: 0 0 16px 16px; 
                 margin: 0 auto; 
                 position: relative;
-                box-shadow: inset 0 -10px 20px rgba(255,255,255,0.05);
+                box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
             ">
                 <!-- Cairan Kimia Reaktif -->
                 <div style="
@@ -183,34 +206,33 @@ with menu[0]:
                     bottom: 8px; 
                     left: 6px; 
                     right: 6px; 
-                    height: {int(simulated_ph * 4) + 60}px; 
+                    height: {int(simulated_ph * 4.5) + 50}px; 
                     background-color: {liquid_color}; 
                     border-radius: 0 0 10px 10px;
-                    transition: background-color 0.5s ease, height 0.5s ease;
+                    transition: background-color 0.4s ease, height 0.4s ease;
+                    box-shadow: inset 0 4px 8px rgba(255,255,255,0.15);
                 "></div>
                 <!-- Garis Skala Pengukur -->
-                <div style="position: absolute; left: 10px; top: 30px; border-left: 2px solid rgba(255,255,255,0.2); height: 100px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; padding-left: 5px; font-size: 8px; color: rgba(255,255,255,0.4);">
-                    <span>--- 150ml</span>
-                    <span>--- 100ml</span>
-                    <span>--- 50ml</span>
+                <div style="position: absolute; left: 10px; top: 30px; border-left: 2px solid rgba(168, 85, 247, 0.3); height: 100px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; padding-left: 5px; font-size: 8px; font-family: monospace; color: #d8b4fe;">
+                    <span>-- 150ml</span>
+                    <span>-- 100ml</span>
+                    <span>-- 50ml</span>
                 </div>
             </div>
-            <div style="margin-top: 20px; font-weight: bold; font-size: 18px; color: {liquid_color};">
-                Nilai pH Cairan: {simulated_ph:.1f}
+            <div style="margin-top: 20px; font-weight: bold; font-size: 20px; color: #f3e8ff; text-shadow: 0 0 8px {liquid_color};">
+                Nilai pH Cairan: <span style="color: {liquid_color};">{simulated_ph:.1f}</span>
             </div>
         </div>
         """
         st.markdown(container_html, unsafe_allow_html=True)
         
-        # HUD Panel Informasi senyawa terpilih
+        # HUD Panel Informasi senyawa pilihan dengan aksen senada
         st.markdown(f"""
         <div class="chemical-hud">
-            <h4>📋 Informasi Senyawa Terpilih</h4>
+            <h4 style="margin-top:0px; color: #e9d5ff !important; font-family: monospace;">📋 INFORMASI SENYAWA</h4>
             <b>Nama Senyawa:</b> {selected_chem['name']} ({selected_chem['formula']})<br/>
             <b>Nama Populer:</b> {selected_chem['common']}<br/>
-            <b>Reaksi Ionisasi Disosiasi:</b> <code>{selected_chem['dissociation']}</code><br/>
+            <b>Ionisasi Disosiasi:</b> <code>{selected_chem['dissociation']}</code><br/>
             <b>Kategori Kelas:</b> {selected_chem['category']}
         </div>
         """, unsafe_allow_html=True)
-
-
