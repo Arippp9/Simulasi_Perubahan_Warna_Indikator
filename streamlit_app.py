@@ -7,7 +7,7 @@ import math
 st.set_page_config(
     page_title="ChemClass Lab - Streamlit Edition",
     page_icon="🧪",
-    layout="wide"
+    layout="wide",
     st.markdown("""
 <style>
 
