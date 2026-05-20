@@ -8,7 +8,10 @@ st.set_page_config(
     page_title="ChemClass Lab - Streamlit Edition",
     page_icon="🧪",
     layout="wide",
-    st.markdown("""
+   
+)
+
+ st.markdown("""
 <style>
 
 .stApp {
@@ -17,8 +20,6 @@ st.set_page_config(
 
 </style>
 """, unsafe_allow_html=True)
-)
-
 # Kustomisasi CSS untuk ambient gelap modern dan sentuhan UI yang halus
 st.markdown("""
 <style>
