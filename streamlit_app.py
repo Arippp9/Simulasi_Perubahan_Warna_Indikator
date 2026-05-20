@@ -1,155 +1,154 @@
-import React, { useState } from "react";
+import streamlit as st
 
-export default function TheoryHub() {
+# =========================
+# CONFIG
+# =========================
+st.set_page_config(
+    page_title="ChemIndicator",
+    page_icon="🧪",
+    layout="centered"
+)
 
-  const [menu, setMenu] = useState("teori");
+# =========================
+# STYLE
+# =========================
+st.markdown("""
+<style>
 
-  // data indikator
-  const indikator = [
-    {
-      nama: "Fenolftalein",
-      ph: "8.3 - 10",
-      asam: "Tidak berwarna",
-      basa: "Pink"
-    },
-
-    {
-      nama: "Metil Jingga",
-      ph: "3.1 - 4.4",
-      asam: "Merah",
-      basa: "Kuning"
-    },
-
-    {
-      nama: "Bromtimol Biru",
-      ph: "6.0 - 7.6",
-      asam: "Kuning",
-      basa: "Biru"
-    }
-  ];
-
-  return (
-
-    <div
-      style={{
-        background: "#0f172a",
-        color: "white",
-        padding: "20px",
-        borderRadius: "10px"
-      }}
-    >
-
-      {/* JUDUL */}
-      <h1>ChemIndicator Learning Hub</h1>
-
-      <p>
-        Website pembelajaran indikator asam basa
-      </p>
-
-      {/* MENU */}
-      <div style={{ marginBottom: "20px" }}>
-
-        <button onClick={() => setMenu("teori")}>
-          Teori
-        </button>
-
-        <button onClick={() => setMenu("indikator")}>
-          Indikator
-        </button>
-
-        <button onClick={() => setMenu("faq")}>
-          FAQ
-        </button>
-
-      </div>
-
-      {/* TEORI */}
-      {menu === "teori" && (
-
-        <div>
-
-          <h2>Teori Asam Basa</h2>
-
-          <h3>1. Arrhenius</h3>
-          <p>
-            Asam menghasilkan ion H+ dan basa menghasilkan ion OH- di air.
-          </p>
-
-          <h3>2. Bronsted Lowry</h3>
-          <p>
-            Asam memberi proton dan basa menerima proton.
-          </p>
-
-          <h3>3. Lewis</h3>
-          <p>
-            Asam menerima pasangan elektron dan basa memberi pasangan elektron.
-          </p>
-
-        </div>
-      )}
-
-      {/* INDIKATOR */}
-      {menu === "indikator" && (
-
-        <div>
-
-          <h2>Tabel Indikator</h2>
-
-          <table border="1" cellPadding="10">
-
-            <thead>
-              <tr>
-                <th>Indikator</th>
-                <th>Trayek pH</th>
-                <th>Warna Asam</th>
-                <th>Warna Basa</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              {indikator.map((item, index) => (
-
-                <tr key={index}>
-
-                  <td>{item.nama}</td>
-                  <td>{item.ph}</td>
-                  <td>{item.asam}</td>
-                  <td>{item.basa}</td>
-
-                </tr>
-
-              ))}
-
-            </tbody>
-
-          </table>
-
-        </div>
-      )}
-
-      {/* FAQ */}
-      {menu === "faq" && (
-
-        <div>
-
-          <h2>FAQ</h2>
-
-          <h3>Apa itu indikator?</h3>
-
-          <p>
-            Indikator adalah zat yang berubah warna sesuai pH larutan.
-          </p>
-
-          <h3>Kenapa indikator penting?</h3>
-
-          <p>
-            Karena membantu menentukan sifat asam atau basa suatu larutan.
-          </p>
-
-        </div>
-      )}
-
-    </div>
-  );
+body {
+    background-color: #0f172a;
 }
+
+.main {
+    background-color: #0f172a;
+    color: white;
+}
+
+h1, h2, h3 {
+    color: #38bdf8;
+}
+
+.stButton>button {
+    background-color: #38bdf8;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.stSelectbox label {
+    color: white !important;
+}
+
+.box {
+    background-color: #1e293b;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# =========================
+# DATA
+# =========================
+data = {
+
+    "HCl": {
+        "sifat": "Asam",
+        "pH": 1,
+        "warna": "Tidak berwarna",
+        "indikator": "Fenolftalein"
+    },
+
+    "CH3COOH": {
+        "sifat": "Asam",
+        "pH": 3,
+        "warna": "Tidak berwarna",
+        "indikator": "Fenolftalein"
+    },
+
+    "NaOH": {
+        "sifat": "Basa",
+        "pH": 13,
+        "warna": "Pink",
+        "indikator": "Fenolftalein"
+    },
+
+    "NH4OH": {
+        "sifat": "Basa",
+        "pH": 11,
+        "warna": "Pink",
+        "indikator": "Fenolftalein"
+    }
+
+}
+
+# =========================
+# TITLE
+# =========================
+st.title("🧪 ChemIndicator")
+
+st.write("""
+Website simulasi indikator asam basa 
+untuk membantu memahami perubahan warna indikator.
+""")
+
+# =========================
+# PILIH LARUTAN
+# =========================
+larutan = st.selectbox(
+    "Pilih Larutan",
+    list(data.keys())
+)
+
+# =========================
+# BUTTON
+# =========================
+if st.button("Cek Hasil"):
+
+    hasil = data[larutan]
+
+    st.markdown("<div class='box'>", unsafe_allow_html=True)
+
+    st.subheader("📋 Hasil Simulasi")
+
+    st.write(f"### Larutan : {larutan}")
+    st.write(f"### Sifat : {hasil['sifat']}")
+    st.write(f"### pH : {hasil['pH']}")
+    st.write(f"### Indikator : {hasil['indikator']}")
+    st.write(f"### Warna : {hasil['warna']}")
+
+    # status warna
+    if hasil["sifat"] == "Asam":
+
+        st.error("🔴 Larutan Bersifat Asam")
+
+    else:
+
+        st.success("🔵 Larutan Bersifat Basa")
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+# =========================
+# TEORI
+# =========================
+st.markdown("---")
+
+st.header("📚 Teori Singkat")
+
+st.write("""
+- Asam memiliki pH kurang dari 7
+- Basa memiliki pH lebih dari 7
+- Indikator digunakan untuk mengetahui sifat larutan
+- Fenolftalein berwarna pink dalam basa
+""")
+
+# =========================
+# FOOTER
+# =========================
+st.markdown("---")
+
+st.caption("ChemIndicator © 2026")
