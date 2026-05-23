@@ -13,6 +13,12 @@ st.set_page_config(
 # ==========================================
 # 2. DATASET KIMIA (PRESETS ZAT & INDIKATOR)
 # ==========================================
+if page == "Introduction":
+    st.title("HAIIIII")
+
+
+elif page == "Simulasi":
+    st.title("Coba simulasi ini")
 CHEMICALS = [
     {"id": "hcl", "name": "Asam Klorida (HCl)", "formula": "HCl", "pH": 1.0, "type": "asam", "category": "Laboratorium", "common": "Asam kuat pembersih porselen", "dissociation": "HCl → H⁺ + Cl⁻"},
     {"id": "h2so4", "name": "Asam Sulfat (Air Aki)", "formula": "H₂SO₄", "pH": 1.5, "type": "asam", "category": "Laboratorium", "common": "Air aki kendaraan pekat", "dissociation": "H₂SO₄ → 2H⁺ + SO₄²⁻"},
@@ -136,7 +142,7 @@ with menu[0]:
                 border-radius: 0 0 16px 16px; 
                 margin: 0 auto; 
                 position: relative;
-                box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+            Q    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
             ">
                 <!-- Cairan Kimia Reaktif -->
                 <div style="
@@ -185,5 +191,5 @@ st.audio(audio_bytes, format="audio/mp3")
 #SIDEBAR
 page = st.sidebar.selectbox(
     "📄 Go to Page",
-    ("Dashboard", "Upload Data", "Finance Chatbot", "Settings")
+    ("Introduction", "Simulasi", "Finance Chatbot", "Settings")
 )
