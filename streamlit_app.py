@@ -183,7 +183,7 @@ audio_bytes = audio_file.read()
 st.audio(audio_bytes, format="audio/mp3")
 
 #SIDEBAR
-
+page = st.sidebar.selectbox(
     "📄 Go to Page",
     ("Dashboard", "Upload Data", "Finance Chatbot", "Settings")
 )
