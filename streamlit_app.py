@@ -181,3 +181,9 @@ audio_file = open("Anything You Want.mp3", "rb")
 audio_bytes = audio_file.read()
 
 st.audio(audio_bytes, format="audio/mp3")
+
+#SIDEBAR
+
+    "📄 Go to Page",
+    ("Dashboard", "Upload Data", "Finance Chatbot", "Settings")
+)
