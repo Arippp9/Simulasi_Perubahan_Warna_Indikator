@@ -245,7 +245,7 @@ if 'page' not in st.session_state:
         
 with st.sidebar:
     st.title("Menu Dashboard")
-    if st.button("🏠 Dashboard): 
+    if st.button("🏠 Dashboard"): 
         st.session_state['page'] = "🏠 Dashboard"
         
     if st.button("✅ To-Do List"):
