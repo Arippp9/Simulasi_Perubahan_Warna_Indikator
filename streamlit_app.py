@@ -260,7 +260,7 @@ with st.sidebar:
     if st.button("🧪Indikator asam dan basa"):
         st.session_state['page'] = '🧪Indikator asam dan basa'
     page = st.session_state['page'] 
-    st.sidebar.divider()n basa":
+    st.sidebar.divider()
 
 # ============================================================
 # 📝 FUNGSI-FUNGSI TO-DO LIST
