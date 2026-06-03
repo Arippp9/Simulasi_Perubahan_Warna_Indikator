@@ -240,7 +240,7 @@ selected_menu = st.sidebar.radio(
     label_visibility="collapsed"
 )
 
-    if 'page' not in st.session_state: 
+if 'page' not in st.session_state: 
     st.session_state['page'] = "Home"
         
 with st.sidebar:
