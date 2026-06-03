@@ -24,9 +24,6 @@ if 'timer_running' not in st.session_state:
 if 'time_left' not in st.session_state:
     st.session_state.time_left = 25 * 60
 
-if 'page' not in st.session_state: 
-    st.session_state['page'] = "Dashboard"
-
 # ============================================================
 # 🎨 FUNGSI apply_theme - GANTI WARNA BACKGROUND & FONT
 # ============================================================
@@ -206,9 +203,7 @@ def apply_theme(theme):
 # 🚀 SIDEBAR - PENGATURAN THEME & MENU
 # ============================================================
 
-with st.sidebar:
-    st.markdown("## ⚙️ Pengaturan")
-    
+with st.sidebar: 
     # === PILIHAN THEME ===
     st.markdown("### 🎨 Tema Background")
     theme_option = st.radio(
@@ -245,6 +240,9 @@ selected_menu = st.sidebar.radio(
     label_visibility="collapsed"
 )
 
+    if 'page' not in st.session_state: 
+    st.session_state['page'] = "Home"
+        
 with st.sidebar:
     st.title("Menu Dashboard")
     if st.button("🏠 Dashboard): 
