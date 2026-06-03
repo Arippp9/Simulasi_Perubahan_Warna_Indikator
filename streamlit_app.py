@@ -257,7 +257,7 @@ with st.sidebar:
     if st.button("🎵 Musik Fokus"):
         st.session_state['page'] = '🎵 Musik Fokus'
 
-     if st.button("🧪Indikator asam dan basa"):
+    if st.button("🧪Indikator asam dan basa"):
         st.session_state['page'] = '🧪Indikator asam dan basa'
     page = st.session_state['page'] 
     st.sidebar.divider()n basa":
