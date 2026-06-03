@@ -24,8 +24,8 @@ if 'timer_running' not in st.session_state:
 if 'time_left' not in st.session_state:
     st.session_state.time_left = 25 * 60
 
-if 'current_menu' not in st.session_state:
-    st.session_state.current_menu = "🏠 Dashboard"
+if 'page' not in st.session_state: 
+    st.session_state['page'] = "Dashboard"
 
 # ============================================================
 # 🎨 FUNGSI apply_theme - GANTI WARNA BACKGROUND & FONT
@@ -245,20 +245,24 @@ selected_menu = st.sidebar.radio(
     label_visibility="collapsed"
 )
 
-if selected_menu == "🏠 Dashboard":
-    st.title("🧪Indikator asam dan basa")
+with st.sidebar:
+    st.title("Menu Dashboard")
+    if st.button("🏠 Dashboard): 
+        st.session_state['page'] = "🏠 Dashboard"
+        
+    if st.button("✅ To-Do List"):
+        st.session_state['page'] = '✅ To-Do List'
+        
+    if st.button("⏱️ Timer Belajar"):
+        st.session_state['page'] = '⏱️ Timer Belajar'
+    
+    if st.button("🎵 Musik Fokus"):
+        st.session_state['page'] = '🎵 Musik Fokus'
 
-elif selected_menu == "✅ To-Do List":
-    st.title("🧪Indikator asam dan basa")
-
-elif selected_menu == "⏱️ Timer Belajar":
-    st.title("🧪Indikator asam dan basa")
-
-elif selected_menu == "🎵 Musik Fokus":
-    st.title("🧪Indikator asam dan basa")
-
-elif selected_menu == "🧪Indikator asam dan basa":
-    st.title("🧪Indikator asam dan basa")
+     if st.button("🧪Indikator asam dan basa"):
+        st.session_state['page'] = '🧪Indikator asam dan basa'
+    page = st.session_state['page'] 
+    st.sidebar.divider()n basa":
 
 # ============================================================
 # 📝 FUNGSI-FUNGSI TO-DO LIST
@@ -285,7 +289,7 @@ def delete_task(index):
 # ═══════════════════════════════════════════════════════════
 # 1️⃣ DASHBOARD UTAMA
 # ═══════════════════════════════════════════════════════════
-if selected_menu == "🏠 Dashboard":
+if selected_page == "🏠 Dashboard":
     st.markdown("# 📚 Dashboard Belajar")
     st.markdown("Selamat datang! Pilih menu di sidebar untuk memulai.")
     
@@ -314,7 +318,7 @@ if selected_menu == "🏠 Dashboard":
 # ═══════════════════════════════════════════════════════════
 # 2️⃣ TO-DO LIST
 # ═══════════════════════════════════════════════════════════
-elif selected_menu == "✅ To-Do List":
+elif selected_page == "✅ To-Do List":
     st.markdown("# 📝 To-Do List Harian")
     
     # Input tugas
@@ -365,7 +369,7 @@ elif selected_menu == "✅ To-Do List":
 # ═══════════════════════════════════════════════════════════════════
 # 3️⃣ TIMER BELAJAR
 # ═══════════════════════════════════════════════════════════
-elif selected_menu == "⏱️ Timer Belajar":
+elif selected_page == "⏱️ Timer Belajar":
     st.markdown("# ⏱️ Timer Belajar (Pomodoro)")
     
     col_timer1, col_timer2 = st.columns([1, 1])
@@ -450,7 +454,7 @@ elif selected_menu == "⏱️ Timer Belajar":
 # ═══════════════════════════════════════════════════════════
 # 4️⃣ MUSIK FOKUS
 # ═══════════════════════════════════════════════════════════
-elif selected_menu == "🎵 Musik Fokus":
+elif selected_page == "🎵 Musik Fokus":
     st.markdown("# 🎵 Musik Fokus")
     
     st.markdown("""
@@ -479,7 +483,7 @@ elif selected_menu == "🎵 Musik Fokus":
 # ==========================================
 # 1. DATASET KIMIA (PRESETS ZAT & INDIKATOR)
 # ==========================================
-elif selected_menu == "Indikator asam dan basa":
+elif selected_page == "Indikator asam dan basa":
     # Semua resource dan logika lokal dimasukkan ke dalam sub-menu ini agar tidak bocor
     CHEMICALS = [
         {"id": "hcl", "name": "Asam Klorida (HCl)", "formula": "HCl", "pH": 1.0, "type": "asam", "category": "Laboratorium", "common": "Asam kuat pembersih porselen", "dissociation": "HCl → H⁺ + Cl⁻"},
