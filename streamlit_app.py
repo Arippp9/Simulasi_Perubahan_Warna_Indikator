@@ -8,7 +8,7 @@ import math
 st.set_page_config(
     page_title="Dashboard Belajar",
     page_icon="📚",
-    layout="wide"
+    layout="centered"
 )
 
 # --- INISIALISASI SESSION STATE ---
